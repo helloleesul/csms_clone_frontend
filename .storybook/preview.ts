@@ -1,5 +1,5 @@
 import type { Preview } from "@storybook/react";
-import "@sun-typeface/SUIT/fonts/variable/woff2/SUIT-Variable.css";
+import "@sun-typeface/SUIT/fonts/static/woff2/SUIT.css";
 
 import "../src/index.css";
 
