@@ -1,4 +1,5 @@
 @import "@sun-typeface/SUIT/fonts/static/woff2/SUIT.css";
+@import "@/shared/assets/fonts/gotham/Gotham.css";
 
 @tailwind base;
 @tailwind components;
