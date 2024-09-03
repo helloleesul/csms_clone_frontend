@@ -1,3 +1,9 @@
+@import "@sun-typeface/SUIT/fonts/variable/woff2/SUIT-Variable.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  font-family: "SUIT Variable", sans-serif;
+}
