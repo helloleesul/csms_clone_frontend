@@ -1,1 +1,1 @@
-export { Button } from "./buttons/Button.tsx";
+export { Button } from "@/shared/ui/Button/Button.tsx";
