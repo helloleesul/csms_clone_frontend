@@ -1,11 +1,10 @@
-import useAuthStore from "@/shared/model/useAuthStore.ts";
+import { SectionForm, SectionHero } from "@/widgets/LayoutLogin";
 
 export const LoginPage = () => {
-  const { login } = useAuthStore();
   return (
-    <>
-      <h1>LoginPage</h1>
-      <button onClick={login}>Log in</button>
-    </>
+    <div className="flex h-dvh">
+      <SectionHero />
+      <SectionForm />
+    </div>
   );
 };
