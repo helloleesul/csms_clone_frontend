@@ -1,6 +1,7 @@
-import Button from "@/shared/ui/Button.tsx";
 import type { Meta, StoryObj } from "@storybook/react";
 import { fn } from "@storybook/test";
+
+import { Button } from "@/shared/ui/buttons/Button.tsx";
 
 const meta = {
   title: "Buttons/Button",

@@ -16,7 +16,7 @@ const colorVariants = {
   gray: "bg-gray200 text-black",
 };
 
-const Button = ({ color, children }: ButtonFontProps) => {
+export const Button = ({ color, children }: ButtonFontProps) => {
   return (
     <button
       className={twMerge(
@@ -27,5 +27,3 @@ const Button = ({ color, children }: ButtonFontProps) => {
     </button>
   );
 };
-
-export default Button;
