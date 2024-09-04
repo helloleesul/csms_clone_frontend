@@ -2,7 +2,7 @@ import { ComponentProps, ReactNode } from "react";
 
 import { twMerge } from "tailwind-merge";
 
-type ButtonFontProps = ComponentProps<"button"> & {
+type ButtonProps = ComponentProps<"button"> & {
   color: "white" | "success" | "primary" | "secondary" | "danger" | "gray";
   children: ReactNode;
 };
@@ -16,11 +16,11 @@ const colorVariants = {
   gray: "bg-gray200 text-black",
 };
 
-export const Button = ({ color, children }: ButtonFontProps) => {
+export const Button = ({ color, children }: ButtonProps) => {
   return (
     <button
       className={twMerge(
-        `font-gotham font-medium text-2xl outline-none px-6 py-5 rounded-lg text-white ${colorVariants[color]}`,
+        `w-full font-gotham font-medium text-sm outline-none px-4 py-2 rounded-[3px] text-white ${colorVariants[color]}`,
       )}
     >
       {children}

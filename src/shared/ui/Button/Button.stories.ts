@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { fn } from "@storybook/test";
 
-import { Button } from "@/shared/ui/buttons/Button.tsx";
+import { Button } from "@/shared/ui/Button/Button.tsx";
 
 const meta = {
   title: "Buttons/Button",
@@ -25,7 +25,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    color: "white",
+    color: "primary",
     children: "Log In",
   },
 };
