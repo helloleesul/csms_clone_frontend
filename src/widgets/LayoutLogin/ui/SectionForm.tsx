@@ -1,4 +1,4 @@
-import { LoginForm } from "@/features/auth/login";
+import { LoginForm } from "@/features/auth";
 
 import EVIQ_LOGO from "@/shared/assets/logo/ci-eviq-large.png";
 

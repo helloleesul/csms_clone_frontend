@@ -1,4 +1,4 @@
-import { LogoutButton } from "@/features/auth/logout";
+import { LogoutButton } from "@/features/auth";
 
 export const EVStationPage = () => {
   return (
