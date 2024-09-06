@@ -5,13 +5,13 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-import { ProtectedRoute } from "@/app/routers/ProtectedRoute.tsx";
-import { PublicRoute } from "@/app/routers/PublicRoute.tsx";
-
 import { EVStationPage } from "@/pages/charging-infra/ev-station";
 import { LoginPage } from "@/pages/login";
 
 import { PATHS } from "@/shared/consts/paths.ts";
+
+import { ProtectedRoute } from "./ProtectedRoute.tsx";
+import { PublicRoute } from "./PublicRoute.tsx";
 
 const routes: RouteObject[] = [
   {
