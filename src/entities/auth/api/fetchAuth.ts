@@ -1,23 +1,24 @@
 import { tokenApi } from "@/shared/api";
 import { Tokens } from "@/shared/model/types.ts";
 
-import { RequestFetchAuthBody } from "../model/types.ts";
+import { RequestFetchAuthBody, ResponseFetchAuthDto } from "../model/types.ts";
 
 export const fetchAuth = async ({
   userId,
   userPassword,
   serviceType = "EVIQ_CSMS_PUBLIC",
 }: RequestFetchAuthBody) => {
-  try {
-    const response = await tokenApi.post("/auth/login", {
-      userId,
-      userPassword,
-      serviceType,
-    });
-    const { accessToken, refreshToken }: Tokens = response.data.resultData;
-    return { accessToken, refreshToken };
-  } catch (error) {
-    console.error("Login failed:", error);
-    throw error; // 에러 발생 시 호출한 곳에서 처리할 수 있도록 에러를 던짐
+  const response = await tokenApi.post("/auth/login", {
+    userId,
+    userPassword,
+    serviceType,
+  });
+  const data: ResponseFetchAuthDto = response.data;
+
+  if (data.resultCode !== "0000") {
+    throw new Error(`인증 실패: ${data.description || "알 수 없는 오류"}`);
   }
+
+  const { accessToken, refreshToken }: Tokens = data.resultData;
+  return { accessToken, refreshToken };
 };
