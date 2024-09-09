@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { fn } from "@storybook/test";
 
-import CircleX from "@/shared/assets/icons/circle-x.svg";
+import IC_CircleX from "@/shared/assets/icons/circle-x.svg";
 
 import { IconButton } from "./IconButton.tsx";
 
@@ -25,7 +25,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    imagePath: CircleX,
+    imagePath: IC_CircleX,
     imageAlt: "close",
     className: "",
   },
