@@ -4,7 +4,7 @@ import { twMerge } from "tailwind-merge";
 
 type ButtonProps = {
   color: "white" | "success" | "primary" | "secondary" | "danger" | "gray";
-  type: "button" | "submit" | "reset";
+  type?: "button" | "submit" | "reset";
   onClick?: () => void;
   children: ReactNode;
 };
@@ -18,7 +18,12 @@ const colorVariants = {
   gray: "bg-gray200 text-black",
 };
 
-export const Button = ({ color, type, onClick, children }: ButtonProps) => {
+export const Button = ({
+  color,
+  type = "button",
+  onClick,
+  children,
+}: ButtonProps) => {
   return (
     <button
       type={type}
