@@ -2,13 +2,11 @@ import { FormEvent, useState } from "react";
 
 import { fetchAuth } from "@/entities/auth";
 
-import CircleX from "@/shared/assets/icons/circle-x.svg";
-import EyeOff from "@/shared/assets/icons/eye-off.svg";
-import Eye from "@/shared/assets/icons/eye.svg";
+import IC_CircleX from "@/shared/assets/icons/circle-x.svg";
+import IC_EyeOff from "@/shared/assets/icons/eye-off.svg";
+import IC_Eye from "@/shared/assets/icons/eye.svg";
 import useAuthStore from "@/shared/model/useAuthStore.ts";
-import { Button } from "@/shared/ui";
-import { IconButton } from "@/shared/ui/IconButton/IconButton.tsx";
-import { LoginTextField } from "@/shared/ui/LoginTextField/LoginTextField.tsx";
+import { Button, IconButton, LoginTextField } from "@/shared/ui";
 
 export const LoginForm = () => {
   const { setAuth } = useAuthStore();
@@ -16,8 +14,8 @@ export const LoginForm = () => {
   const [userPassword, setUserPassword] = useState("");
   const [isPasswordShow, setIsPasswordShow] = useState(false);
 
-  const loginHandler = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const loginHandler = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     if (!userId || !userPassword) return;
 
     try {
@@ -26,6 +24,16 @@ export const LoginForm = () => {
         userPassword,
       });
       setAuth({ accessToken, refreshToken });
+      // TODO: fetchUser -> setUserInfo
+      // 인증 후 사용자 정보를 요청
+      // try {
+      //   const userInfo = await fetchUser();
+      //   setUserInfo(userInfo); // 사용자 정보를 상태에 저장
+      // } catch (userError) {
+      //   console.error("사용자 정보 요청 실패: ", userError);
+      //   // 사용자 정보 요청 실패에 대한 처리
+      //   // 로그인 세션을 종료하거나, 사용자에게 에러 메시지
+      // }
     } catch (error) {
       console.error("로그인 실패: ", error);
     }
@@ -43,7 +51,7 @@ export const LoginForm = () => {
           <IconButton
             className={!userId ? "hidden" : "hover:opacity-100 opacity-50"}
             onClick={() => setUserId("")}
-            imagePath={CircleX}
+            imagePath={IC_CircleX}
             imageAlt="close"
           />
         </LoginTextField>
@@ -56,13 +64,13 @@ export const LoginForm = () => {
         >
           <div className={`${!userPassword ? "hidden" : "flex gap-2"}`}>
             <IconButton
-              imagePath={isPasswordShow ? Eye : EyeOff}
+              imagePath={isPasswordShow ? IC_Eye : IC_EyeOff}
               imageAlt="close"
               onClick={() => setIsPasswordShow((prevState) => !prevState)}
               className="hover:opacity-100 opacity-50"
             />
             <IconButton
-              imagePath={CircleX}
+              imagePath={IC_CircleX}
               imageAlt="close"
               onClick={() => setUserPassword("")}
               className="hover:opacity-100 opacity-50"
