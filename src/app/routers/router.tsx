@@ -8,6 +8,8 @@ import {
 import { EVStationPage } from "@/pages/charging-infra/ev-station";
 import { LoginPage } from "@/pages/login";
 
+import { LayoutAdmin } from "@/widgets/LayoutAdmin";
+
 import { PATHS } from "@/shared/consts/paths.ts";
 
 import { ProtectedRoute } from "./ProtectedRoute.tsx";
@@ -36,12 +38,21 @@ const routes: RouteObject[] = [
     element: <ProtectedRoute />,
     children: [
       {
-        path: PATHS.CHARGING_INFRA.BASE,
-        element: <Navigate to={PATHS.CHARGING_INFRA.EV_STATION} />,
-      },
-      {
-        path: PATHS.CHARGING_INFRA.EV_STATION,
-        element: <EVStationPage />,
+        element: <LayoutAdmin />,
+        children: [
+          {
+            path: PATHS.CHARGING_INFRA.BASE,
+            element: <Navigate to={PATHS.CHARGING_INFRA.EV_STATION} />,
+          },
+          {
+            path: PATHS.CHARGING_INFRA.EV_STATION,
+            element: <EVStationPage />,
+          },
+          {
+            path: "*",
+            element: <h1>404</h1>,
+          },
+        ],
       },
     ],
   },
