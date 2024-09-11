@@ -1,15 +1,18 @@
 import { FormEvent, useState } from "react";
 
 import { fetchAuth } from "@/entities/auth";
+import { fetchUser } from "@/entities/user";
 
 import IC_CircleX from "@/shared/assets/icons/circle-x.svg";
 import IC_EyeOff from "@/shared/assets/icons/eye-off.svg";
 import IC_Eye from "@/shared/assets/icons/eye.svg";
 import useAuthStore from "@/shared/model/useAuthStore.ts";
+import useUserStore from "@/shared/model/useUserStore.ts";
 import { Button, IconButton, LoginTextField } from "@/shared/ui";
 
 export const LoginForm = () => {
   const { setAuth } = useAuthStore();
+  const { setUserInfo } = useUserStore();
   const [userId, setUserId] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [isPasswordShow, setIsPasswordShow] = useState(false);
@@ -24,18 +27,18 @@ export const LoginForm = () => {
         userPassword,
       });
       setAuth({ accessToken, refreshToken });
-      // TODO: fetchUser -> setUserInfo
+
       // 인증 후 사용자 정보를 요청
-      // try {
-      //   const userInfo = await fetchUser();
-      //   setUserInfo(userInfo); // 사용자 정보를 상태에 저장
-      // } catch (userError) {
-      //   console.error("사용자 정보 요청 실패: ", userError);
-      //   // 사용자 정보 요청 실패에 대한 처리
-      //   // 로그인 세션을 종료하거나, 사용자에게 에러 메시지
-      // }
+      try {
+        const userInfo = await fetchUser();
+        setUserInfo(userInfo);
+      } catch (userError) {
+        console.error(userError);
+        // 사용자 정보 요청 실패에 대한 처리
+        // 로그인 세션을 종료하거나, 사용자에게 에러 메시지 던지기
+      }
     } catch (error) {
-      console.error("로그인 실패: ", error);
+      console.error(error);
     }
   };
 

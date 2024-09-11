@@ -5,19 +5,21 @@ import { UserInfo } from "@/entities/user";
 
 import IC_Logout from "@/shared/assets/icons/log-out.svg";
 import useAuthStore from "@/shared/model/useAuthStore.ts";
+import useUserStore from "@/shared/model/useUserStore.ts";
 import { IconButton } from "@/shared/ui";
 
 export const Logout = () => {
   const { clearAuth } = useAuthStore();
+  const { clearUserInfo } = useUserStore();
 
   const logoutHandler = async (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     try {
-      const status = await removeAuth();
-      if ("OK" === status) clearAuth();
-      // TODO: clearUserInfo
+      await removeAuth();
+      clearAuth();
+      clearUserInfo();
     } catch (error) {
-      console.error("Error during authentication:", error); // 에러 처리
+      console.error(error);
     }
   };
 

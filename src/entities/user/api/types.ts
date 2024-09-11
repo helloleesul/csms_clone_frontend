@@ -1,4 +1,4 @@
-export type ResponseFetchUserDto = {
+export interface ResponseFetchUserDto {
   resultCode: number;
   description: string;
   needRedirect: boolean;
@@ -20,4 +20,4 @@ export type ResponseFetchUserDto = {
       isRoaming: boolean;
     };
   };
-};
+}

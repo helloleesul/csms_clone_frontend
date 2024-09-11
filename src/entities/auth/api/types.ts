@@ -6,18 +6,18 @@ export interface RequestFetchAuthBody {
   serviceType?: string;
 }
 
-export type ResponseFetchAuthDto = {
+export interface ResponseFetchAuthDto {
   resultCode: string;
   description: string;
   needRedirect: boolean;
   resultData: Tokens;
-};
+}
 
-export type ResponseRemoveAuthDto = {
+export interface ResponseRemoveAuthDto {
   resultCode: string;
   description: string;
   needRedirect: boolean;
   resultData: {
     status: string;
   };
-};
+}
