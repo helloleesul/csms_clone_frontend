@@ -1,13 +1,39 @@
-import { attachAuthTokenToConfig } from "@/shared/libs/getSessionToken.ts";
+import { attachAuthTokenToConfig } from "@/shared/libs/attachAuthTokenToConfig.ts";
+import { fetchTokenReissue } from "@/shared/libs/fetchTokenReissue.ts";
 
 import { csmsInstance, tokenInstance } from "./instances.ts";
 
+// TODO: 하나로 통일 시키기
 // 토큰 API 요청 전 처리
 tokenInstance.interceptors.request.use(
   (config) => {
     return attachAuthTokenToConfig(config);
   },
   (error) => {
+    return Promise.reject(error);
+  },
+);
+
+// 토큰 API 응답 전 처리
+tokenInstance.interceptors.response.use(
+  async (response) => {
+    console.log("토큰 API 응답 성공: ", response);
+
+    if ("Access Token expired" === response.data.description) {
+      try {
+        // 재발급 함수 호출
+        await fetchTokenReissue(response.config);
+        // 재요청
+        return tokenInstance(response.config);
+      } catch (refreshError) {
+        return Promise.reject(refreshError);
+      }
+    }
+
+    return response;
+  },
+  async (error) => {
+    console.log("토큰 API 응답 실패: ", error);
     return Promise.reject(error);
   },
 );
@@ -24,21 +50,24 @@ csmsInstance.interceptors.request.use(
 
 // CSMS API 응답 전 처리
 csmsInstance.interceptors.response.use(
-  (response) => response,
-  async (error) => {
-    const originalRequest = error.config;
+  async (response) => {
+    console.log("CSMS API 응답 성공: ", response);
 
-    if (error.response.status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true;
+    if ("Access Token expired" === response.data.description) {
       try {
-        // TODO: 토큰을 재발급받고, 저장하는 함수를 호출하고 반환된 토큰을 헤더에 저장시키기
-        // originalRequest.headers.Authorization = `Bearer ${newToken}`;
-        // return csmsApi(originalRequest); // 기존 요청을 재요청
+        // 재발급 함수 호출
+        await fetchTokenReissue(response.config);
+        // 재요청
+        return csmsInstance(response.config);
       } catch (refreshError) {
         return Promise.reject(refreshError);
       }
     }
 
+    return response;
+  },
+  async (error) => {
+    console.log("CSMS API 응답 실패: ", error);
     return Promise.reject(error);
   },
 );

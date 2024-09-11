@@ -2,6 +2,7 @@ import { InternalAxiosRequestConfig } from "axios";
 
 export const attachAuthTokenToConfig = (config: InternalAxiosRequestConfig) => {
   const sessionAuth = sessionStorage.getItem("auth-storage");
+  console.log("헤더 토큰을 포함하는 요청 주소", config.url);
 
   if (sessionAuth) {
     try {
@@ -10,7 +11,7 @@ export const attachAuthTokenToConfig = (config: InternalAxiosRequestConfig) => {
         config.headers.Authorization = `Bearer ${state.tokens.accessToken}`;
       }
     } catch (error) {
-      console.error("Failed to parse JSON from sessionStorage:", error);
+      console.error("세션 스토리지 불러오기 오류", error);
     }
   }
 
