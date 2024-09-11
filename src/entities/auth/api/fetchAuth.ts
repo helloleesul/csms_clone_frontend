@@ -1,7 +1,7 @@
 import { tokenApi } from "@/shared/api";
 import { Tokens } from "@/shared/model/types.ts";
 
-import { RequestFetchAuthBody, ResponseFetchAuthDto } from "../model/types.ts";
+import { RequestFetchAuthBody, ResponseFetchAuthDto } from "./types.ts";
 
 export const fetchAuth = async ({
   userId,
@@ -15,7 +15,7 @@ export const fetchAuth = async ({
   });
   const data: ResponseFetchAuthDto = response.data;
 
-  if (data.resultCode !== "0000") {
+  if ("0000" !== data.resultCode) {
     throw new Error(`인증 실패: ${data.description || "알 수 없는 오류"}`);
   }
 
