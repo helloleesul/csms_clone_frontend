@@ -11,6 +11,7 @@ import { IconButton } from "@/shared/ui";
 export const LayoutAdmin = () => {
   const [menuOpen, setMenuOpen] = useState(true);
 
+  // TODO: 반응형 축소할 때 menu 닫아두기
   return (
     <div className="flex h-dvh">
       <div
