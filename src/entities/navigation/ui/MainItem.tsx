@@ -1,5 +1,4 @@
-import IC_ArrowDown from "@/shared/assets/icons/ic-arrow-down.svg";
-import IC_ArrowUp from "@/shared/assets/icons/ic-arrow-up.svg";
+import IC_Arrow from "@/shared/assets/icons/ic-arrow-white.svg";
 
 type MainItemProps = {
   label: string;
@@ -15,6 +14,7 @@ export const MainItem = ({
   isExpanded,
 }: MainItemProps) => {
   return (
+    // TODO: hover 색상 수정하기
     <div
       className={`flex justify-between text-white hover:bg-secondary transition-[background] py-4 px-5 w-full rounded-lg ${isExpanded ? "bg-secondary" : ""}`}
     >
@@ -23,7 +23,11 @@ export const MainItem = ({
         <span className="font-bold">{label}</span>
       </div>
       {subMenu && (
-        <img src={isExpanded ? IC_ArrowUp : IC_ArrowDown} alt="arrow" />
+        <img
+          src={IC_Arrow}
+          alt="arrow"
+          className={`transition ${isExpanded ? "[transform:rotateZ(180deg)]" : ""}`}
+        />
       )}
     </div>
   );

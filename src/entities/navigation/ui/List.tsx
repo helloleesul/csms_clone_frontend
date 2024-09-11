@@ -26,6 +26,7 @@ export const List = () => {
       {NAVIGATION_LIST.map((item) => (
         <li key={item.label}>
           <div
+            className="cursor-pointer"
             onClick={() =>
               item.subMenu ? handleToggle(item.path) : navigate(item.path)
             }
