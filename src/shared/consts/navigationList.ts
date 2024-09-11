@@ -50,3 +50,5 @@ export const NAVIGATION_LIST = [
     ],
   },
 ];
+
+Object.freeze(NAVIGATION_LIST);

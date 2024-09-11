@@ -21,3 +21,5 @@ export const PATHS = {
     ADMIN_USER: "/settings/admin-user",
   },
 };
+
+Object.freeze(PATHS);
